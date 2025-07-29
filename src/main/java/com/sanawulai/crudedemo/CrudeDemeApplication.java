@@ -43,9 +43,25 @@ public class CrudeDemeApplication {
 
            // updateInstructor(appDAO);
 
-            updateCourse(appDAO);
+            //updateCourse(appDAO);
+
+            //deleteInstructor(appDAO);
+
+            deleteCourse(appDAO);
 
         };
+    }
+
+    private void deleteCourse(AppDAO appDAO) {
+
+        int theId = 10;
+
+        System.out.println("Deleting the course with id: " + theId);
+
+        appDAO.deleteCourseById(theId);
+
+        System.out.println("Done!");
+
     }
 
     private void updateCourse(AppDAO appDAO) {
@@ -181,7 +197,7 @@ public class CrudeDemeApplication {
     }
 
     private void deleteInstructor(AppDAO appDAO) {
-        int theId = 4;
+        int theId = 1;
         System.out.println("Deleting instructor with id: " + theId);
         appDAO.deleteIstructorById(theId);
     }
