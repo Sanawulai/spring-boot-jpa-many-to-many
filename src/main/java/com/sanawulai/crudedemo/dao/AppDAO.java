@@ -1,7 +1,10 @@
 package com.sanawulai.crudedemo.dao;
 
+import com.sanawulai.crudedemo.entity.Course;
 import com.sanawulai.crudedemo.entity.Instructor;
 import com.sanawulai.crudedemo.entity.InstructorDetail;
+
+import java.util.List;
 
 public interface AppDAO {
 
@@ -14,6 +17,16 @@ public interface AppDAO {
     InstructorDetail findInstructorDetailById(int theId);
 
     void deleteInstructorDetailById(int theId);
+
+    List<Course> findCoursesByInstructorId(int theId);
+
+    Instructor findInstructorByIdJoinFetch(int theId);
+
+    void update(Instructor theInstructor);
+
+    void update(Course theCourse);
+
+    Course findCourseById(int theId);
 
 
 
