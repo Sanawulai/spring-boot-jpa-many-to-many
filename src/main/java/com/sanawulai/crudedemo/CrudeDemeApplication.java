@@ -51,6 +51,7 @@ public class CrudeDemeApplication {
         //print the reviews
         System.out.println("Reviews: "+theCourse.getReviews());
 
+
         //print the course
         System.out.println("theCourse: "+theCourse);
 
