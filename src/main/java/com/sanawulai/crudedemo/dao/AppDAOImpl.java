@@ -3,6 +3,7 @@ package com.sanawulai.crudedemo.dao;
 import com.sanawulai.crudedemo.entity.Course;
 import com.sanawulai.crudedemo.entity.Instructor;
 import com.sanawulai.crudedemo.entity.InstructorDetail;
+import com.sanawulai.crudedemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,6 +154,43 @@ public class AppDAOImpl implements AppDAO {
         //execute query
         Course course = query.getSingleResult();
         return course;
+
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int theId) {
+        //create the query
+        TypedQuery<Course> query = entityManager.createQuery(
+                "select c from Course c "
+                        + "Join Fetch c.students "
+                        + " where c.id=:data", Course.class);
+        query.setParameter("data", theId);
+
+        //execute query
+        Course course = query.getSingleResult();
+        return course;
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int theId) {
+
+        //create query
+        TypedQuery<Student> query = entityManager.createQuery(
+                "select s from Student s "
+                        + "Join Fetch s.courses "
+                        + " where s.id=:data", Student.class);
+        query.setParameter("data", theId);
+
+        //execute the query
+        Student student = query.getSingleResult();
+        return student;
+
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
 
     }
 

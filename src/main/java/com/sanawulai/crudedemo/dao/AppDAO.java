@@ -3,6 +3,7 @@ package com.sanawulai.crudedemo.dao;
 import com.sanawulai.crudedemo.entity.Course;
 import com.sanawulai.crudedemo.entity.Instructor;
 import com.sanawulai.crudedemo.entity.InstructorDetail;
+import com.sanawulai.crudedemo.entity.Student;
 
 import java.util.List;
 
@@ -33,6 +34,13 @@ public interface AppDAO {
     void save(Course theCourse);
 
     Course findCourseAndReviewsByCourseId(int theId);
+
+    Course findCourseAndStudentsByCourseId(int theId);
+
+    Student findStudentAndCoursesByStudentId(int theId);
+
+    void update(Student theStudent);
+
 
 
 

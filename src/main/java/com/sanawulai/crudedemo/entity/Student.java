@@ -2,12 +2,16 @@ package com.sanawulai.crudedemo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "student")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "first_name")
@@ -19,13 +23,24 @@ public class Student {
     @Column(name = "email")
     private String email;
 
-    public Student() {
-    }
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH},
+            mappedBy = "students")
+    private List<Course> courses;
+
+    public Student() {}
 
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -52,13 +67,21 @@ public class Student {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    //add convenience method
+    public void addCourse(Course theCourse){
+        if (courses == null){
+            courses = new ArrayList<>();
+        }
+        courses.add(theCourse);
+        theCourse.addStudent(this);
     }
 }
