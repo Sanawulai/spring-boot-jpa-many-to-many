@@ -3,6 +3,9 @@ package com.sanawulai.crudedemo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "course")
 public class Course {
@@ -25,6 +28,10 @@ public class Course {
             CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_id")
+    private List<Review> reviews;
 
     public Course() {
 
@@ -55,6 +62,24 @@ public class Course {
 
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    //add a convenience method
+
+    public void addReview(Review theReview){
+
+        if (reviews == null){
+            reviews = new ArrayList<>();
+        }
+        reviews.add(theReview);
     }
 
     @Override
