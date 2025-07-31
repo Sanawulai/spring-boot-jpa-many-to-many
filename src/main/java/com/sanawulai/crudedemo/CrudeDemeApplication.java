@@ -27,10 +27,23 @@ public class CrudeDemeApplication {
 
             //findStudentAndCourses(appDAO);
 
-            addMoreCoursesForStudents(appDAO);
+            //addMoreCoursesForStudents(appDAO);
+
+            //deleteCourse(appDAO);
+
+            deleteStudent(appDAO);
 
 
         };
+    }
+
+    private void deleteStudent(AppDAO appDAO) {
+        int theId = 2;
+        Student theStudent = appDAO.findStudentAndCoursesByStudentId(theId);
+
+        appDAO.deleteStudentById(theId);
+
+        System.out.println("Done!");
     }
 
     private void addMoreCoursesForStudents(AppDAO appDAO) {
