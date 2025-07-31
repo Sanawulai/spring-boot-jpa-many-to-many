@@ -200,7 +200,7 @@ public class AppDAOImpl implements AppDAO {
 
         //retrieve the student
         Student theStudent = entityManager.find(Student.class, theId);
-        if (theStudent == null) {
+        if (theStudent != null) {
 
             //get the courses
             List<Course> courses = theStudent.getCourses();
